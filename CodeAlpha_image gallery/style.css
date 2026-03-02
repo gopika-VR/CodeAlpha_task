@@ -61,7 +61,7 @@ h2 {
     max-height: 80%;
     object-fit: contain; /* over zoom avoid */
     border-radius: 10px;
-    background: white;
+    background: rgb(234, 159, 244);
 }
 
 .close {
@@ -69,7 +69,7 @@ h2 {
     top: 20px;
     right: 30px;
     font-size: 35px;
-    color: white;
+    color: rgb(3, 3, 3);
     cursor: pointer;
 }
 
@@ -78,7 +78,7 @@ h2 {
     padding: 8px 20px;
     border: none;
     background: red;
-    color: white;
+    color: rgb(74, 4, 4);
     border-radius: 6px;
     cursor: pointer;
 }
