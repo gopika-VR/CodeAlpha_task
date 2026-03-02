@@ -1,29 +1,45 @@
-const images = document.querySelectorAll(".gallery img");
+const gallery = document.getElementById("gallery");
+const fileInput = document.getElementById("fileInput");
 const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
-const closeBtn = document.querySelector(".close");
+const lightboxImg = document.getElementById("lightboxImg");
 
-let currentIndex = 0;
+let selectedImage = null;
 
-images.forEach((img, index) => {
-    img.addEventListener("click", () => {
-        lightbox.style.display = "flex";
-        lightboxImg.src = img.src;
-        currentIndex = index;
-    });
+// Open file selector
+function openFile() {
+    fileInput.click();
+}
+
+// Add image
+fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    const img = document.createElement("img");
+    img.src = URL.createObjectURL(file);
+
+    img.onclick = () => openLightbox(img);
+
+    gallery.appendChild(img);
+    fileInput.value = "";
 });
 
-closeBtn.addEventListener("click", () => {
+// Open Lightbox
+function openLightbox(img) {
+    lightbox.style.display = "flex";
+    lightboxImg.src = img.src;
+    selectedImage = img;
+}
+
+// Close Lightbox
+function closeLightbox() {
     lightbox.style.display = "none";
-});
+}
 
-document.getElementById("next").onclick = () => {
-    currentIndex = (currentIndex + 1) % images.length;
-    lightboxImg.src = images[currentIndex].src;
-};
-
-document.getElementById("prev").onclick = () => {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    lightboxImg.src = images[currentIndex].src;
-};
-
+// Delete Image
+function deleteImage() {
+    if (selectedImage) {
+        selectedImage.remove();
+        closeLightbox();
+    }
+}
